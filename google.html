@@ -1,164 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAFTAR MAHASISWA/I PAI B</title>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAFTAR MAHASISWA/I PAI B</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      width: 340px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+    .login-box h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .login-box p {
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #666;
+    }
+    .input-box {
+      position: relative;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+    .input-box input {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      transition: 0.3s;
+    }
+    .input-box input:focus {
+      border-color: #4facfe;
+      box-shadow: 0 0 6px rgba(79, 172, 254, 0.5);
+    }
+    .input-box label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: #999;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+    .input-box input:focus ~ label,
+    .input-box input:valid ~ label {
+      top: -8px;
+      left: 10px;
+      color: #4facfe;
+      font-size: 12px;
+      background: #fff;
+      padding: 0 4px;
+    }
+
+    /* Tombol */
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Spinner loading */
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Pesan */
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      animation: fadeIn 0.5s ease;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    .message svg {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* Animasi fade */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <div class="login-box">
-        <div class="logo">
-          
-        </div>
-        <h2>DAFTAR</h2>
-        <p>Gunakan Nama Lengkap & Nomer Induk</p>
-        <form name="bismillah-bisa">
-            <div class="input-box">
-                <input name="Email" required/>
-                <label>NAMA MAHASISWA</label>
-            </div>
-            <div class="input-box">
-                <input name="Password"required/>
-                <label>NIM</label>
-            </div>
-             <div class="input-group">
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Ingat Saya</label>
-            </div>
-            <script>
-      const btnKirim = document.querySelector('.btn-kirim');
-      const btnLoading = document.querySelector('.btn-loading');
-      const myAlert = document.querySelector('.my-alert');
+  <div class="login-box">
+    <h2>DAFTAR</h2>
+    <p>Gunakan Nama Lengkap & Nomor Induk</p>
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // ketika tombol submit diklik
-        // tampilkan tombol loading, hilangkan tombol kirim
-        btnLoading.classList.toggle('d-none');
-        btnKirim.classList.toggle('d-none');
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          .then((response) => {
-            // tampilkan tombol kirim, hilangkan tombol loading
-            btnLoading.classList.toggle('d-none');
-            btnKirim.classList.toggle('d-none');
-            // tampilkan alert
-            myAlert.classList.toggle('d-none');
-            // reset formnya
-            form.reset();
-            console.log('Success!', response);
-          })
-          .catch((error) => console.error('Error!', error.message));
-    </script>
-            <style>
- body {
-    font-family: 'Google';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    margin: 0;
-    background-color: #f2f2f2;
-}
-                
-a { 
-  text-decoration: none;
-  color: #fff;
-}
-                
-.login-box {
-  height: 390px;
-    width: 298px;
-    padding: 40px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 12px;
-}
+    <form id="loginForm" name="bismillah-bisa">
+      <div class="input-box">
+        <input type="text" name="Email" id="username" required />
+        <label>Nama Mahasiswa</label>
+      </div>
+      <div class="input-box">
+        <input type="text" name="Password" id="password" required />
+        <label>NIM</label>
+      </div>
+      <button type="submit" id="submitBtn">
+        <span id="btnText">Daftar</span>
+      </button>
+    </form>
 
-.logo img {
-    width: 92px;
-    margin-bottom: 20px;
-}
-.input-group {
-  margin-bottom: 15px;
-  text-align: left;
-  color :  rgba(0, 0, 0, 0.5);
-}
-h2 {
-    margin: 0 0 16px;
-    font-size: 24px;
-    color: #333;
-}
-
-p {
-  margin-left: 10px;
-  text-decoration: none;
-  
-}
-.forgot {
-    color: black;
-}
-.input-box {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.input-box input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-}
-
-.input-box label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: #999;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.input-box input:focus ~ label,
-.input-box input:valid ~ label {
-    top: -10px;
-    left: 10px;
-    color: #333;
-    font-size: 12px;
-}
-
-button {
-    width: 107.5%;
-    padding: 10px;
-    background: #4285f4;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-button:hover {
-    background: #357ae8;
-}
-  </style>
-  <button type="submit">Klik Satu Kali Untuk Mendaftar</button>
-  <a href="social.html "class="forgot"><p>Klik Disini Untuk Bergabung Di Platfrom Lainnya</p></a>
-        </form>
-        <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzPj_AFopmJsj-CPIQmII4rXFojYcDOU27GuOYRcYMGU6HwEI9CAt6_bLpLYIBRcQ0Nkg/exec'
-  const form = document.forms['bismillah-bisa']
-
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message))
-  })
-</script>
+    <!-- pesan sukses/gagal -->
+    <div class="message success" id="successMsg">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 24 24">
+        <path d="M20.285 6.709l-11.285 11.285-5.285-5.285 1.415-1.415 3.87 3.87 9.87-9.87z"/>
+      </svg>
+      Pendaftaran Berhasil!
     </div>
+
+    <div class="message error" id="errorMsg">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24">
+        <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5 16.59L16.59 17 12 12.41 7.41 17 7 16.59 11.59 12 7 7.41 7.41 7 12 11.59 16.59 7 17 7.41 12.41 12 17 16.59z"/>
+      </svg>
+      Gagal! Nama harus huruf & NIM harus angka.
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzPj_AFopmJsj-CPIQmII4rXFojYcDOU27GuOYRcYMGU6HwEI9CAt6_bLpLYIBRcQ0Nkg/exec';
+    const form = document.getElementById('loginForm');
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      let username = document.getElementById("username").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      let usernameValid = /^[A-Za-z\s]+$/.test(username);
+      let passwordValid = /^[0-9]+$/.test(password);
+
+      document.getElementById("successMsg").style.display = "none";
+      document.getElementById("errorMsg").style.display = "none";
+
+      if (usernameValid && passwordValid) {
+        // ubah tombol jadi loading
+        btn.disabled = true;
+        btnText.innerHTML = `<div class="spinner"></div> `;
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            btn.disabled = false;
+            btnText.innerHTML = "Klik Satu Kali Untuk Mendaftar";
+            document.getElementById("successMsg").style.display = "block";
+            form.reset();
+          })
+          .catch(error => {
+            btn.disabled = false;
+            btnText.innerHTML = "Klik Satu Kali Untuk Mendaftar";
+            console.error('Error!', error.message);
+          });
+      } else {
+        document.getElementById("errorMsg").style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>
