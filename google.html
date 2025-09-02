@@ -3,94 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAFTAR MAHASISWA/I PAI B</title>
+  <title>Daftar PAI B</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
     .login-box {
       background: #fff;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      width: 340px;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      width: 320px;
       text-align: center;
-      animation: fadeIn 0.8s ease;
+      transform: perspective(1000px) rotateX(5deg);
+      transition: transform 0.6s;
+    }
+    .login-box:hover {
+      transform: perspective(1000px) rotateX(0deg) scale(1.03);
     }
     .login-box h2 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       color: #333;
     }
     .login-box p {
-      margin-bottom: 25px;
+      color: #777;
+      margin-bottom: 20px;
       font-size: 14px;
-      color: #666;
     }
-    .input-box {
-      position: relative;
-      margin-bottom: 25px;
-      text-align: left;
-    }
-    .input-box input {
+    .login-box input {
       width: 100%;
       padding: 12px;
-      font-size: 15px;
+      margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .login-box input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 8px rgba(37,117,252,0.4);
       outline: none;
-      transition: 0.3s;
     }
-    .input-box input:focus {
-      border-color: #4facfe;
-      box-shadow: 0 0 6px rgba(79, 172, 254, 0.5);
-    }
-    .input-box label {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      color: #999;
-      pointer-events: none;
-      transition: 0.3s;
-    }
-    .input-box input:focus ~ label,
-    .input-box input:valid ~ label {
-      top: -8px;
-      left: 10px;
-      color: #4facfe;
-      font-size: 12px;
-      background: #fff;
-      padding: 0 4px;
-    }
-
-    /* Tombol */
-    button {
+    .login-box button {
       width: 100%;
       padding: 12px;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      border: none;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
       color: #fff;
+      border: none;
+      border-radius: 12px;
       font-size: 16px;
-      font-weight: bold;
-      border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
+      transition: transform 0.2s, box-shadow 0.3s;
     }
-    button:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+    .login-box button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
-
-    /* Spinner loading */
+    .login-box button:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
     .spinner {
       border: 3px solid #f3f3f3;
       border-top: 3px solid #fff;
@@ -98,71 +78,65 @@
       width: 18px;
       height: 18px;
       animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
     }
     @keyframes spin {
       100% { transform: rotate(360deg); }
     }
-
-    /* Pesan */
     .message {
       display: none;
       margin-top: 20px;
       font-weight: bold;
       font-size: 16px;
-      animation: fadeIn 0.5s ease;
+      padding: 10px;
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .success {
-      color: green;
+      color: #2ecc71;
+      background: rgba(46, 204, 113, 0.1);
     }
     .error {
-      color: red;
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.1);
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
     .message svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       vertical-align: middle;
       margin-right: 6px;
-    }
-
-    /* Animasi fade */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="login-box">
-    <h2>DAFTAR</h2>
-    <p>Gunakan Nama Lengkap & Nomor Induk</p>
-
+    <h2>DAFTAR PAI B</h2>
+    <p>Gunakan Nama Lengkap & NIM</p>
     <form id="loginForm" name="bismillah-bisa">
-      <div class="input-box">
-        <input type="text" name="Email" id="username" required />
-        <label>Nama Mahasiswa</label>
-      </div>
-      <div class="input-box">
-        <input type="text" name="Password" id="password" required />
-        <label>NIM</label>
-      </div>
-      <button type="submit" id="submitBtn">
-        <span id="btnText">Daftar</span>
-      </button>
+      <input type="text" id="username" name="Email" placeholder="Nama Mahasiswa" required>
+      <input type="text" id="password" name="Password" placeholder="NIM" required>
+      <button type="submit" id="submitBtn"><span id="btnText">Klik Untuk Daftar</span></button>
     </form>
 
-    <!-- pesan sukses/gagal -->
+    <!-- Pesan sukses/gagal -->
     <div class="message success" id="successMsg">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#2ecc71" viewBox="0 0 24 24">
         <path d="M20.285 6.709l-11.285 11.285-5.285-5.285 1.415-1.415 3.87 3.87 9.87-9.87z"/>
       </svg>
-      Pendaftaran Berhasil!
+      Berhasil & Data Terkirim!
     </div>
 
     <div class="message error" id="errorMsg">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#e74c3c" viewBox="0 0 24 24">
         <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5 16.59L16.59 17 12 12.41 7.41 17 7 16.59 11.59 12 7 7.41 7.41 7 12 11.59 16.59 7 17 7.41 12.41 12 17 16.59z"/>
       </svg>
-      Gagal! Nama harus huruf & NIM harus angka.
+      Login Gagal! Nama harus huruf dan NIM harus angka.
     </div>
   </div>
 
@@ -185,20 +159,26 @@
       document.getElementById("errorMsg").style.display = "none";
 
       if (usernameValid && passwordValid) {
-        // ubah tombol jadi loading
+        // tombol loading
         btn.disabled = true;
-        btnText.innerHTML = `<div class="spinner"></div> `;
+        btnText.innerHTML = `<div class="spinner"></div> Mengirim...`;
 
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
           .then(response => {
             btn.disabled = false;
-            btnText.innerHTML = "Klik Satu Kali Untuk Mendaftar";
+            btnText.innerHTML = "Klik Untuk Login";
             document.getElementById("successMsg").style.display = "block";
             form.reset();
+
+            // Redirect setelah 2 detik
+            setTimeout(() => {
+              window.location.href = "about.html"; 
+            }, 2000);
+
           })
           .catch(error => {
             btn.disabled = false;
-            btnText.innerHTML = "Klik Satu Kali Untuk Mendaftar";
+            btnText.innerHTML = "Klik Untuk Login";
             console.error('Error!', error.message);
           });
       } else {
