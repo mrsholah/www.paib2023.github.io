@@ -161,7 +161,7 @@
       if (usernameValid && passwordValid) {
         // tombol loading
         btn.disabled = true;
-        btnText.innerHTML = `<div class="spinner"></div> Mengirim...`;
+        btnText.innerHTML = `<div class="spinner"></div> Menunggu...`;
 
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
           .then(response => {
@@ -172,7 +172,7 @@
 
             // Redirect setelah 2 detik
             setTimeout(() => {
-              window.location.href = "about.html"; 
+              window.location.href = "social.html"; 
             }, 2000);
 
           })
