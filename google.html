@@ -1,190 +1,262 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar PAI B</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-    }
-    .login-box {
-      background: #fff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      width: 320px;
-      text-align: center;
-      transform: perspective(1000px) rotateX(5deg);
-      transition: transform 0.6s;
-    }
-    .login-box:hover {
-      transform: perspective(1000px) rotateX(0deg) scale(1.03);
-    }
-    .login-box h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-    .login-box p {
-      color: #777;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: all 0.3s;
-    }
-    .login-box input:focus {
-      border-color: #2575fc;
-      box-shadow: 0 0 8px rgba(37,117,252,0.4);
-      outline: none;
-    }
-    .login-box button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.3s;
-    }
-    .login-box button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    .login-box button:hover:not(:disabled) {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .spinner {
-      border: 3px solid #f3f3f3;
-      border-top: 3px solid #fff;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      animation: spin 1s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-    .message {
-      display: none;
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 8px;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .success {
-      color: #2ecc71;
-      background: rgba(46, 204, 113, 0.1);
-    }
-    .error {
-      color: #e74c3c;
-      background: rgba(231, 76, 60, 0.1);
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    .message svg {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 6px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor Berita PAI 23</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #4fc3f7, #0288d1);
+    color: #fff;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  h2 { text-align:center; text-shadow:2px 2px 5px rgba(0,0,0,0.3); }
+  .box {
+    background: rgba(255,255,255,0.15);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+  }
+  label { display:block; margin:8px 0 4px; font-weight:bold; }
+  input, textarea, button { 
+    width:95%; padding:10px; border-radius:10px; 
+    border:none; outline:none; margin:5px 0; 
+  }
+  textarea { resize:vertical; }
+  button {
+    background:#0abab5; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s;
+  }
+  button:hover:not(:disabled) { background:#089e9a; transform:scale(1.05); }
+  button:disabled { opacity:0.7; cursor:not-allowed; }
+  .news-card {
+    background: rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:15px 20px;
+    margin:8px 0;
+    text-align:left;
+    width:100%;
+    max-width:850px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  }
+  .news-card img {
+    width:100%; max-height:300px; object-fit:cover;
+    border-radius:10px; margin-bottom:10px; display:block;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer;
+  }
+  .news-card img.disabled { pointer-events:none; opacity:0.6; }
+  .news-card h3 { font-size:20px; font-weight:bold; margin:0 0 8px; cursor:pointer; }
+  .news-card .meta { font-size:16px; color:#fff; margin-bottom:10px; font-style:italic; }
+  .news-card .isi { display:none; margin-top:10px; }
+  .news-card .isi p { font-size:15px; line-height:1.5em; margin:0 0 10px; }
+  .actions button { width:auto; padding:5px 10px; margin-left:5px; font-size:15px; }
+  #status { margin-top:10px; font-weight:bold; }
+  #newsList { display:flex; flex-direction:column-reverse; gap:8px; align-items:center; }
+  .loading {
+    display:inline-block; width:16px; height:16px; border:2px solid #fff;
+    border-top:2px solid transparent; border-radius:50%;
+    margin-left:5px; animation:spin 0.8s linear infinite; vertical-align:middle;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+</style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>DAFTAR PAI B</h2>
-    <p>Gunakan Nama Lengkap & NIM</p>
-    <form id="loginForm" name="bismillah-bisa">
-      <input type="text" id="username" name="Email" placeholder="Nama Mahasiswa" required>
-      <input type="text" id="password" name="Password" placeholder="NIM" required>
-      <button type="submit" id="submitBtn"><span id="btnText">Klik Untuk Daftar</span></button>
-    </form>
 
-    <!-- Pesan sukses/gagal -->
-    <div class="message success" id="successMsg">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#2ecc71" viewBox="0 0 24 24">
-        <path d="M20.285 6.709l-11.285 11.285-5.285-5.285 1.415-1.415 3.87 3.87 9.87-9.87z"/>
-      </svg>
-      Berhasil & Data Terkirim!
-    </div>
+<div class="box">
+  <h2>Editor Berita</h2>
+  <form id="formBerita">
+    <label>Penulis:</label>
+    <input type="text" name="pembuat" required>
 
-    <div class="message error" id="errorMsg">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#e74c3c" viewBox="0 0 24 24">
-        <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5 16.59L16.59 17 12 12.41 7.41 17 7 16.59 11.59 12 7 7.41 7.41 7 12 11.59 16.59 7 17 7.41 12.41 12 17 16.59z"/>
-      </svg>
-      Login Gagal! Nama harus huruf dan NIM harus angka.
-    </div>
-  </div>
+    <label>Link Gambar/Kosongkan:</label>
+    <input type="url" name="gambar" placeholder="https://i.imgur.com/contoh.jpg">
 
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzPj_AFopmJsj-CPIQmII4rXFojYcDOU27GuOYRcYMGU6HwEI9CAt6_bLpLYIBRcQ0Nkg/exec';
-    const form = document.getElementById('loginForm');
-    const btn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
+    <label>Judul:</label>
+    <input type="text" name="judul" required>
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+    <label>Isi:</label>
+    <textarea name="isi" rows="5" required></textarea>
 
-      let username = document.getElementById("username").value.trim();
-      let password = document.getElementById("password").value.trim();
+    <button id="submitBtn" type="submit">SUBMIT</button>
+  </form>
+  <p id="status"></p>
+</div>
 
-      let usernameValid = /^[A-Za-z\s]+$/.test(username);
-      let passwordValid = /^[0-9]+$/.test(password);
+<div class="box">
+  <h2>Daftar Berita</h2>
+  <div id="newsList"><p>Memuat berita...</p></div>
+</div>
 
-      document.getElementById("successMsg").style.display = "none";
-      document.getElementById("errorMsg").style.display = "none";
+<script>
+const SANDI = "DINDA"; 
+const ADMIN_WA = "6281234567890"; // ganti nomor WA admin
+const scriptURL = "https://script.google.com/macros/s/AKfycbw-Jarw88Iv8ETQiDoFxVzl8j8oMqOyIvcyiwDesnWiSKDwRwWU-EutNAFDTSsLBAGF5Q/exec";
 
-      if (usernameValid && passwordValid) {
-        // tombol loading
-        btn.disabled = true;
-        btnText.innerHTML = `<div class="spinner"></div> Menunggu...`;
+const form = document.getElementById("formBerita");
+const status = document.getElementById("status");
+const newsList = document.getElementById("newsList");
+const submitBtn = document.getElementById("submitBtn");
 
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-          .then(response => {
-            btn.disabled = false;
-            btnText.innerHTML = "Klik Untuk Login";
-            document.getElementById("successMsg").style.display = "block";
-            form.reset();
+function setLoading(button, isLoading, originalText) {
+  if (isLoading) {
+    button.disabled = true;
+    button.setAttribute("data-original", originalText);
+    button.innerHTML = `${originalText} <span class="loading"></span>`;
+  } else {
+    button.disabled = false;
+    button.innerHTML = button.getAttribute("data-original") || originalText;
+  }
+}
 
-            // Redirect setelah 2 detik
-            setTimeout(() => {
-              window.location.href = "social.html"; 
-            }, 2000);
+function hubungiAdmin(aksi, nama="") {
+  const pesan = `Assalamualaikum admin, saya lupa sandi untuk ${aksi} berita di Cyber Media PAI 23${nama ? " atas nama "+nama : ""}.`;
+  if(confirm("Sandi salah. Mau hubungi admin untuk dapat sandi?")) {
+    window.location.href = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
+  }
+}
 
-          })
-          .catch(error => {
-            btn.disabled = false;
-            btnText.innerHTML = "Klik Untuk Login";
-            console.error('Error!', error.message);
-          });
-      } else {
-        document.getElementById("errorMsg").style.display = "block";
-      }
+// Submit berita baru
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const enteredPass = prompt("Masukkan sandi admin untuk submit berita:");
+  if(enteredPass !== SANDI) { 
+    hubungiAdmin("submit", form.pembuat.value); 
+    return; 
+  }
+
+  setLoading(submitBtn, true, "SUBMIT");
+  const formData = new FormData(form);
+
+  // Gambar sepenuhnya opsional
+  if (!formData.get("gambar")) formData.set("gambar", "");
+
+  fetch(scriptURL, { method:"POST", body:formData })
+    .then(res => res.text())
+    .then(txt => { 
+      status.innerText = txt; 
+      form.reset(); 
+      loadNews(); 
+    })
+    .catch(err => { status.innerText = "Gagal: "+err; })
+    .finally(() => setLoading(submitBtn, false, "SUBMIT"));
+});
+
+// Load daftar berita
+function loadNews() {
+  fetch(scriptURL)
+    .then(res => res.json())
+    .then(data => {
+      newsList.innerHTML = "";
+      if(data.length === 0) { newsList.innerHTML="<p>Tidak ada berita.</p>"; return; }
+      data.forEach((row, i) => {
+        const card = document.createElement("div");
+        card.className = "news-card";
+        card.innerHTML = `
+          ${row.gambar ? `<img id="img-${i}" src="${row.gambar}" alt="Gambar Berita" onclick="toggleIsi(${i})">` : ""}
+          <h3 onclick="toggleIsi(${i})">${row.judul}</h3>
+          <div class="meta">${row.tanggal || ""} | Oleh: ${row.pembuat || "-"}</div>
+          <div id="isi-${i}" class="isi">
+            <p>${row.isi}</p>
+            <div class="actions">
+              <button id="editBtn-${i}" onclick="startEdit(${i})">Edit</button>
+              <button id="deleteBtn-${i}" onclick="deleteNews(${i})">Hapus</button>
+            </div>
+          </div>
+        `;
+        newsList.appendChild(card);
+      });
+    })
+    .catch(err => newsList.innerHTML="<p>Error memuat berita</p>");
+}
+
+// Toggle isi berita
+function toggleIsi(i) {
+  const isiDiv = document.getElementById("isi-" + i);
+  const img = document.getElementById("img-" + i);
+  const isVisible = isiDiv.style.display === "block";
+  isiDiv.style.display = isVisible ? "none" : "block";
+  if (!isVisible) img?.classList.add("disabled"); else img?.classList.remove("disabled");
+}
+
+// Edit berita
+function startEdit(i) {
+  const enteredPass = prompt("Masukkan sandi admin untuk edit berita:");
+  if(enteredPass !== SANDI) { 
+    hubungiAdmin("edit"); 
+    return; 
+  }
+
+  fetch(scriptURL)
+    .then(res => res.json())
+    .then(data => {
+      const row = data[i]; if(!row) return;
+      const isiDiv = document.getElementById("isi-" + i);
+      isiDiv.innerHTML = `
+        <label>Penulis:</label>
+        <input type="text" id="editPembuat-${i}" value="${row.pembuat || ""}">
+        <label>Link Gambar (Opsional):</label>
+        <input type="url" id="editGambar-${i}" value="${row.gambar || ""}">
+        <label>Judul:</label>
+        <input type="text" id="editJudul-${i}" value="${row.judul}">
+        <label>Isi:</label>
+        <textarea id="editIsi-${i}" rows="4">${row.isi}</textarea>
+        <button id="saveBtn-${i}" onclick="saveEdit(${i})">Simpan</button>
+        <button onclick="loadNews()">Batal</button>
+      `;
     });
-  </script>
+}
+
+// Simpan edit berita
+function saveEdit(i) {
+  const saveBtn = document.getElementById(`saveBtn-${i}`);
+  setLoading(saveBtn, true, "Menyimpan");
+
+  const pembuat = document.getElementById("editPembuat-"+i).value;
+  const gambar = document.getElementById("editGambar-"+i).value.trim();
+  const judul = document.getElementById("editJudul-"+i).value;
+  const isi = document.getElementById("editIsi-"+i).value;
+
+  const formData = new FormData();
+  formData.append("editIndex", i);
+  formData.append("pembuat", pembuat);
+  formData.append("gambar", gambar || "");
+  formData.append("judul", judul);
+  formData.append("isi", isi);
+
+  fetch(scriptURL, { method:"POST", body:formData })
+    .then(res => res.text())
+    .then(txt => { status.innerText = txt; loadNews(); })
+    .catch(err => status.innerText = "❌ Gagal edit: " + err)
+    .finally(() => setLoading(saveBtn, false, "Simpan"));
+}
+
+// Hapus berita
+function deleteNews(i) {
+  const enteredPass = prompt("Masukkan sandi admin untuk hapus berita:");
+  if(enteredPass !== SANDI) { 
+    hubungiAdmin("hapus"); 
+    return; 
+  }
+  if(!confirm("Hapus berita ini?")) return;
+
+  const deleteBtn = document.getElementById(`deleteBtn-${i}`);
+  setLoading(deleteBtn, true, "Menghapus");
+
+  const formData = new FormData();
+  formData.append("deleteIndex", i);
+  fetch(scriptURL, { method:"POST", body:formData })
+    .then(res => res.text())
+    .then(txt => { status.innerText = txt; loadNews(); })
+    .catch(err => status.innerText = "Gagal: "+err)
+    .finally(() => setLoading(deleteBtn, false, "Hapus"));
+}
+
+loadNews();
+</script>
+
 </body>
 </html>
